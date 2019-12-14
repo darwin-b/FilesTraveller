@@ -6,8 +6,8 @@ import platform
 
 start_time = time.time()
 
-pictures_path = "/Users/darwinbollepalli/Downloads"
-dest = "/Users/darwinbollepalli/projects/dest"
+pictures_path = "C:\\Users\\BSNR\\Documents\\Loan Documents"
+dest = "C:\\Users\\BSNR\\Documents\\Projects\\dest"
 
 if platform.system()=="Windows" :
     path_joiner = "\\"
@@ -29,6 +29,9 @@ def traverse(path,destination):
     else: 
         content  = os.listdir(path)
         for each_path in content:
+            # ignoring hidden files
+            if each_path[0]=='.':
+                continue
             path_inprogress = path+path_joiner+each_path
             # print("paths/filenames: ",each_path)
             traverse(path_inprogress,destination)
