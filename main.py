@@ -2,28 +2,34 @@
 import os
 import shutil
 import time
+import platform
 
 start_time = time.time()
 
-pictures_path = "D:\\Darwin Required Backup\\Pictures"
+pictures_path = "/Users/darwinbollepalli/Downloads"
+dest = "/Users/darwinbollepalli/projects/dest"
 
-dest = "C:\\Users\\BSNR\\Documents\\Projects\\FilesTraveller\\dest"
+if platform.system()=="Windows" :
+    path_joiner = "\\"
+else:
+    path_joiner="/"
 
 def traverse(path,destination):
+    
     if os.path.isfile(path):
         src = path
         base_name = os.path.basename(src)
         get_extension = base_name.split('.')[-1]
-        dest_ext = destination+"\\"+get_extension
+        dest_ext = destination+path_joiner+get_extension
         if not os.path.isdir(dest_ext):
             os.makedirs(dest_ext)
-        dest_withfilename = dest_ext+"\\"+base_name
+        dest_withfilename = dest_ext+path_joiner+base_name
         shutil.copyfile(src,dest_withfilename)
 
     else: 
         content  = os.listdir(path)
         for each_path in content:
-            path_inprogress = path+"\\"+each_path
+            path_inprogress = path+path_joiner+each_path
             # print("paths/filenames: ",each_path)
             traverse(path_inprogress,destination)
 
